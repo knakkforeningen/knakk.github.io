@@ -30,7 +30,7 @@
                     <p class="text-lg">
                         Her finner du alt du trenger å vite om det fantastiske kortspillet Knakk.
                         På denne siden kan du lese reglene og finne ut mer om Norsk Knakkforening.
-                        Trenger du å regne ut resultater fra et spill? Gå til resultat-siden vår.
+                        Trenger du å regne ut resultater fra et spill? Gå til <a href="resultat.html"> resultat-siden vår.</a>  
                     </p>
                 
             </div>
@@ -140,18 +140,17 @@
 <!-- om -->
 <section id="om" class="mb-12">
     <h2 class="text-3xl font-bold text-center mb-12 mt-48">Norsk Knakkforening</h2>
-    
+    <!-- historie -->
     <div class="max-w-4xl mx-auto">
-        <!-- historie -->
-        <div class="grid grid-cols-2 items-center mb-16">
-            <div>
+        <div class="grid grid-cols-1 md:grid-cols-2 items-center mb-16">
+            <div class="flex justify-center md:justify-start mb-4 md:mb-0">
                 <img
                     src="images/KnakkAltlogo1s.png"
                     alt="Norsk Knakkforening logo alternativ 1"
-                    class="rounded-xl w-64 transition-transform hover:scale-110 hover:rotate-3 duration-300"
+                    class="rounded-xl w-48 md:w-64 transition-transform hover:scale-110 hover:rotate-3 duration-300"
                 />
             </div>
-                <div class="-ml-20 text-center">  
+            <div class="text-center md:-ml-20">
                 <h3 class="text-2xl font-bold mb-4">Vår Historie</h3>
                 <p class="text-lg leading-relaxed">
                     <span class="font-bold text-primary">Norsk Knakkforening</span> ble stiftet <span class="font-semibold">17. juli 2023</span>
@@ -184,15 +183,15 @@
         <div class="text-center mb-32">
             <h3 class="text-2xl font-semibold mb-4">Kontakt oss</h3>
             <p class="mb-4">Har du spørsmål eller ønsker å bli medlem?</p>
-            <div class="flex gap-4 justify-center">
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <button class="btn btn-primary" onclick="location.href='mailto:norskknakkforening@gmail.com'">
-                    Send mail til knakkforeningen
+                    Send en mail
                 </button>
                 <button class="btn" onclick="location.href='https://www.facebook.com/groups/723458003005971'">
                     Følg oss på Facebook
                 </button>
             </div>
-        </div>
+         </div>
     </div>
 </section>
  
