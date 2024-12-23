@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Her skal det knakkes</title>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/htmx.org@1.5.0/dist/htmx.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.htmx) {
+                window.htmx.process(document.body);
+            } else {
+                console.error("htmx is not loaded");
+            }
+        });
+    </script>
+</head>
+
+<body class="bg-base-100">
+    <div id="header" hx-get="header.html" hx-trigger="load"></div>
+
+    <div class="max-w-7xl mx-auto px-4">
+        <!-- intro-->
+        <section class="mb-12 text-center">
+            <h2 class="text-3xl font-bold mb-6">Velkommen</h2>
+            <div class="card bg-base-100 ">
+                <div class="card-body">
+                    <p class="text-lg">
+                        Her finner du alt du trenger å vite om det fantastiske kortspillet Knakk.
+                        På denne siden kan du lese reglene og finne ut mer om Norsk Knakkforening.
+                        Trenger du å regne ut resultater fra et spill? Gå til resultat-siden vår.
+                    </p>
+                
+            </div>
+        </section>
+
+<!-- regler -->
+<section id="regler" class="mb-32">
+    
+    <h2 class="text-3xl font-bold mb-6">Regler</h2>
+    <div class="card bg-base-100 shadow-xl mb-8">
+        <div class="card-body">
+            <div id="rules-content" class="prose prose-sm max-w-none 
+            prose-h1:text-lg
+            prose-h3:text-sm 
+            prose-p:text-sm 
+            prose-ul:text-sm
+            prose-h1:font-bold 
+            prose-h3:font-semibold
+            prose-ul:my-1
+            prose-h1:mt-6    
+            prose-h1:mb-2      
+            prose-ul:mt-2">
+        </div>
+        </div> 
+    </div>
+
+<!--- markdown render regler --->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+    fetch('regler/regler.md')
+        .then(response => response.text())
+        .then(text => {
+            marked.setOptions({
+                gfm: true,
+                breaks: true,
+                headerIds: true
+            });
+            document.getElementById('rules-content').innerHTML = marked.parse(text);
+        });
+</script>
+
+               <!-- runder-->
+               <div class="card bg-base-100 mb-8">
+                <div class="card-body">
+                    <h2 class="text-lg font-bold mb-2" id="runder">Runder</h2>
+                    <div class="text-sm space-y-2 ml-4">
+                        <p>Kan deles i to kategorier:</p>
+                        <ul class="list-disc pl-4 space-y-1">
+                            <li>Kort / tress = tre like</li>
+                            <li>Lang / straight flush = fire på rekke i samme suit</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card bg-base-100 shadow-xl">
+                    <figure><img src="images/totress.png" alt="Knakk første runde" class="w-full"></figure>
+                    <div class="card-body">
+                        <h4 class="card-title">Runde 1: To tresser</h4>
+                        <p>To korte. Minimum 6 kort legges ut</p>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl">
+                    <figure><img src="images/enkortenlang.jpg" alt="Knakk andre runde" class="w-full"></figure>
+                    <div class="card-body">
+                        <h4 class="card-title">Runde 2: En tress og en straight flush</h4>
+                        <p>En kort og en lang. Minimum 7 kort legges ut</p>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl">
+                    <figure><img src="images/tolange.jpg" alt="Knakk tredje runde" class="w-full"></figure>
+                    <div class="card-body">
+                        <h4 class="card-title">Runde 3: To straight flush </h4>
+                        <p>To lange. Minimum 8 kort legges ut</p>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl">
+                    <figure><img src="images/trekorte.jpg" alt="Knakk fjerde runde" class="w-full"></figure>
+                    <div class="card-body">
+                        <h4 class="card-title">Runde 4: Tre tresser</h4>
+                        <p>Tre korte. Minimum 9 kort legges ut. Her er det lurt å knakke mye</p>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl">
+                    <figure><img src="images/tokorteenlangaltutpåengang.jpg" alt="Knakk siste runde" class="w-full"></figure>
+                    <div class="card-body">
+                        <h4 class="card-title">Runde 5: To tresser og en straight flush</h4>
+                        <p>To korte og en lang - alt ut på én gang. Minimum 10 kort legges ut (alle kort legges ned, selv kortet man trekker inn)</p>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl">
+                    <figure><img src="images/KnakkAltlogo3.png"class="w-full"></figure>
+                    <div class="card-body">
+                        <h4 class="card-title">Ferdig? </h4>
+                        <a href="resultat.html" class="btn btn-danger">Regn ut resultater</a>
+                    </div>
+                </div>
+            </div>
+</section>
+
+<!-- om -->
+<section id="om" class="mb-12">
+    <h2 class="text-3xl font-bold text-center mb-12 mt-48">Norsk Knakkforening</h2>
+    
+    <div class="max-w-4xl mx-auto">
+        <!-- historie -->
+        <div class="grid grid-cols-2 items-center mb-16">
+            <div>
+                <img
+                    src="images/KnakkAltlogo1s.png"
+                    alt="Norsk Knakkforening logo alternativ 1"
+                    class="rounded-xl w-64 transition-transform hover:scale-110 hover:rotate-3 duration-300"
+                />
+            </div>
+                <div class="-ml-20 text-center">  
+                <h3 class="text-2xl font-bold mb-4">Vår Historie</h3>
+                <p class="text-lg leading-relaxed">
+                    <span class="font-bold text-primary">Norsk Knakkforening</span> ble stiftet <span class="font-semibold">17. juli 2023</span>
+                    av en gruppe dedikerte kortspillere som ønsket å dele sin lidenskap for knakk. Foreningen består i dag av 4 styremedlemmer og 5 medlemmer.
+                </p>
+            </div>
+        </div>
+
+        <!-- hva vi gjør -->
+        <div class="text-center mb-">
+            <h3 class="text-2xl font-semibold mb-4">Hva vi gjør</h3>
+            <p class="mb-4">Vår misjon er å spre knakkgleden til hele Norden. Vi arrangerer:</p>
+            <ul class="space-y-2">
+                <li>🎲 Årlig generalforsamling</li>
+                <li>🏆 Norsk knakkmesterskap</li>
+                <li>📚 Nybegynnerkurs</li>
+                <li>🤝 Sosiale sammenkomster</li>
+            </ul>
+            
+        </div>
+        
+        <div class="flex justify-center mb-32 mt-32 ">
+            <div class="border-l-4 border-primary pl-4 italic">
+                "Her skal det knakkes "
+                <span class="inline-block animate-bounce text-4xl not-italic">🤛</span>
+            </div>
+        </div>
+
+        <!-- kontakt oss -->
+        <div class="text-center mb-32">
+            <h3 class="text-2xl font-semibold mb-4">Kontakt oss</h3>
+            <p class="mb-4">Har du spørsmål eller ønsker å bli medlem?</p>
+            <div class="flex gap-4 justify-center">
+                <button class="btn btn-primary" onclick="location.href='mailto:norskknakkforening@gmail.com'">
+                    Send mail til knakkforeningen
+                </button>
+                <button class="btn" onclick="location.href='https://www.facebook.com/groups/723458003005971'">
+                    Følg oss på Facebook
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+ 
+ </div>
+ </body>
+ </html>

@@ -1,0 +1,166 @@
+    <!DOCTYPE html>
+    <html lang="en" data-theme="light">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Resultat</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet">
+        <script src="https://unpkg.com/htmx.org@1.7.0/dist/htmx.min.js"></script>
+        <script src="js/calculatescore.js"></script>
+    </head>
+    <body class="bg-base-100">
+        <div class="max-w-7xl mx-auto px-4">
+        <div hx-get="header.html" hx-trigger="load"></div>
+        <h2 class="text-3xl font-bold text-center mb-6">Regn ut resultat </h2>   
+        <div class="card-body flex flex-col items-center justify-center text-center">
+            <p class="mb-6"> Fyll inn navn på spillere og poeng i tabellen. <br> Poengfordeling: </p>
+            
+            <div class="flex items-center justify-center space-x-8">
+                <div class="flex items-center gap-3">
+                    <span class="text-6xl">🂢 🃉</span>
+                    <span>2-9: <br>5 poeng</span>
+                </div>
+        
+                <span class="text-2xl text-base-300">|</span>
+        
+                <div class="flex items-center gap-3">
+                    <span class="text-6xl">🂪 🂽</span>
+                    <span>10 & bildekort: <br> 10 poeng</span>
+                </div>
+        
+                <span class="text-2xl text-base-300">|</span>
+        
+                <div class="flex items-center gap-3">
+                    <span class="text-6xl">🂡</span>
+                    <span>Ess: <br> 15 poeng</span>
+                </div>
+        
+                <span class="text-2xl text-base-300">|</span>
+        
+                <div class="flex items-center gap-3">
+                    <span class="text-6xl">🃟</span>
+                    <span>Joker: <br> 50 poeng</span>
+                </div>
+            </div>
+        </div>  
+        
+        <div class="card bg-base-100 shadow-xl mb-8">
+                <div class="card-body">
+                    <form id="resultForm">
+                        <div class="overflow-x-auto">
+                            <table class="table table-zebra w-full text-center" id="scoreTable" >   
+                                <thead>
+                                    <tr>
+                                        <th>Runde:</th>
+                                        <th contenteditable="true">Spelar 1</th>
+                                        <th contenteditable="true">Spelar 2</th>
+                                        <th contenteditable="true">Spelar 3</th>
+                                        <th contenteditable="true">Spelar 4</th>
+                                        <th contenteditable="true">Spelar 5</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="scoreTableBody">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="flex justify-end gap-4 mt-6">
+                            <button class="btn" id="clearFormButton" type="button">Tøm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        
+        <script>
+            // lag tabell
+            const tbody = document.getElementById('scoreTableBody');
+            const numPlayers = 5;
+            const numRounds = 5;
+            
+            for (let round = 1; round <= numRounds; round++) {
+                const row = document.createElement('tr');
+                
+                // runder
+                const roundCell = document.createElement('td');
+                roundCell.textContent = round;
+                roundCell.className = "font-bold bg-base-300 w-16";
+                row.appendChild(roundCell);
+                
+                // spillere
+                for (let player = 1; player <= numPlayers; player++) {
+                    const cell = document.createElement('td');
+                    cell.contentEditable = "true";
+                    cell.inputMode = "numeric";
+                    cell.pattern = "[0-9]*";
+                    cell.className = `row${round}`;
+                    row.appendChild(cell);
+                }
+                
+                tbody.appendChild(row);
+            }
+            
+            const sumRow = document.createElement('tr');
+            const sumLabel = document.createElement('td');
+            sumLabel.textContent = 'Sum';
+            sumRow.appendChild(sumLabel);
+        
+            for (let player = 1; player <= numPlayers; player++) {
+                const sumCell = document.createElement('td');
+                sumCell.contentEditable = "true";
+                sumCell.className = "sum bg-base-200";
+                sumRow.appendChild(sumCell);
+            }
+            tbody.appendChild(sumRow);
+    //validering 
+    tbody.addEventListener('input', function(e) {
+    // sjekk at tall ender på 0 eller 5, marker celle rød hvis ikke 
+    const cells = tbody.querySelectorAll('[contenteditable]');
+    cells.forEach(cell => {
+        const value = cell.textContent.trim();
+        if (value && !value.endsWith('0') && !value.endsWith('5')) {
+            cell.classList.add('bg-red-200');  //farge her
+        } else {
+            cell.classList.remove('bg-red-200');  
+        }
+    });
+
+    // marker spiller med lavest poeng - ignorer 0 poeng... fordi det er veldig usannsynlig å få 0 gjennom alle runder (men ikke unmulug )
+    const sums = new Array(numPlayers).fill(0);
+    const rows = tbody.querySelectorAll('tr:not(:last-child)');
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('[contenteditable]');
+        cells.forEach((cell, index) => {
+            sums[index] += parseInt(cell.textContent) || 0;
+        });
+    });
+
+    const sumCells = tbody.querySelectorAll('.sum');
+    let minSum = Infinity;
+    sumCells.forEach((cell, index) => {
+        cell.textContent = sums[index];
+        if (sums[index] > 0) {
+            minSum = Math.min(minSum, sums[index]);
+        }
+    });
+
+    sumCells.forEach(cell => {
+        cell.classList.remove('bg-yellow-100');
+        if (parseInt(cell.textContent) === minSum && minSum < Infinity) {
+            cell.classList.add('bg-yellow-100');
+        }
+    });
+});
+        </script>
+
+            <div class="card bg-base-100 shadow-xl mb-8">
+                <div class="card-body text-center">
+                    <h2 class="card-title justify-center">Stats</h2> <p class="mb-6 text-center">  ♣️ ♥️ ♠️ ♦️ <br> </p>
+                    <p> Kommer </p>
+                </div>
+            </div>
+
+            <div id="resultResult" hx-swap="outerHTML"></div>
+        </div>
+    </body>
+    </html>
