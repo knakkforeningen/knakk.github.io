@@ -13,7 +13,7 @@
 - Stokk kortene
 - Del ut 10 kort til hver spiller
 - Resten blir trekkbunke
-- Spilleren til venstre for dealer starter med å snu første kort, og har første rett på dette 
+- Spilleren til venstre for dealer starter med å snu første kort, og har førsterett på dette 
  
 ### Din tur består av
 - **TREKK**: Ta ett nytt kort (fra bunken eller siste kastede kort)
