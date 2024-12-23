@@ -35,7 +35,7 @@
 - Alle regner ut sine poeng ved å telle gjenværende kort på hånda
 
 # Poengregning
-- lave kort (2-9): **5 poeng**
+- Lave kort (2-9): **5 poeng**
 - 10 og bildekort: **10 poeng**
 - Ess: **15 poeng**
 - Joker: **50 poeng**

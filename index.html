@@ -6,7 +6,9 @@
     <title>Her skal det knakkes</title>
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/htmx.org@1.5.0/dist/htmx.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> 
+    <script src="https://unpkg.com/htmx.org@1.7.0/dist/htmx.min.js"></script>
+    <script src="js/script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             if (window.htmx) {
@@ -36,9 +38,8 @@
             </div>
         </section>
 
-<!-- regler -->
+<!-- regler hentes fra regler.md markdown egen fil -->
 <section id="regler" class="mb-32">
-    
     <h2 class="text-3xl font-bold mb-6">Regler</h2>
     <div class="card bg-base-100 shadow-xl mb-8">
         <div class="card-body">
@@ -57,8 +58,7 @@
         </div> 
     </div>
 
-<!--- markdown render regler --->
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<!--- markdown render regler 
 <script>
     fetch('regler/regler.md')
         .then(response => response.text())
@@ -70,7 +70,7 @@
             });
             document.getElementById('rules-content').innerHTML = marked.parse(text);
         });
-</script>
+</script>--->
 
                <!-- runder-->
                <div class="card bg-base-100 mb-8">
@@ -197,4 +197,4 @@
  
  </div>
  </body>
- </html>
+</html>

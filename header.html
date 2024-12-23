@@ -4,7 +4,7 @@
         <a href="index.html"><img src="images/Knakklogo.png" id="logo" alt="Norsk Knakkforening logo" class="mx-auto mb-6 max-w-[200px]"></a>
         
         <div class="navbar bg-base-200 rounded-lg shadow-lg">
-            <!-- Mobile menu -->
+            <!-- mobil hamburger menu  -->
             <div class="navbar-start lg:hidden w-full">
                 <div class="dropdown">
                     <div tabindex="0" role="button" class="btn btn-ghost">
@@ -18,7 +18,7 @@
                 </div>
             </div>
             
-            <!-- Desktop menu -->
+            <!-- nettside  -->
             <div class="navbar-center hidden lg:flex mx-auto">
                 <ul class="menu menu-horizontal">
                     <li><a href="index.html#regler">Spillregler</a></li>
@@ -33,25 +33,4 @@
             transition: transform 0.1s;
         }
     </style>
-    <script>
-      let rotation = 0;
-      let scrollLoc = window.pageYOffset;
-      const maxRotation = 20; 
-    
-      window.addEventListener("scroll", function() {
-        let newPos = window.pageYOffset;
-        let diff = newPos - scrollLoc;
-        rotation += diff * 0.2; 
-        rotation = Math.max(-maxRotation, Math.min(maxRotation, rotation));
-        scrollLoc = newPos;
-
-        document.getElementById("logo").style.transform = `rotate(${rotation}deg)`;
-      });
-
-              // Reset rotation when page is refreshed or accessed via anchor link
-              window.addEventListener("load", function() {
-            rotation = 0;
-            document.getElementById("logo").style.transform = `rotate(0deg)`;
-        });
-    </script>
 </div>

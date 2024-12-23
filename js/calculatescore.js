@@ -52,5 +52,3 @@ window.addEventListener('beforeunload', function() {
 const clearButton = document.createElement('button');
 clearButton.textContent = 'Clear Form';
 document.body.appendChild(clearButton);
-
-
